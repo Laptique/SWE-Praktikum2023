@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="date-container">
+    <h1>{{krank }} Krankmeldungen</h1>
+</div>
+<div class="table-header-verwaltung">
+    <div class="button-group">
+            <a href=" {{ url_for('main.verwaltung', mbPT='MB')  }}  "><button class="rounded-button1">Mitarbeiter</button></a>
+            <a href=" {{ url_for('main.verwaltung', mbPT='PT')  }}  "><button class="rounded-button2">Patient</button></a>
+    </div>
+    <!--<div class="search-box">
+        <input type="text" class="search-box-text" placeholder="Suchen...">
+    </div>-->
+    <div class="dropdown">
+        <button class="dropdown-button">Edit</button>
+        <div class="dropdown-content">
+                <a href="{{ url_for( 'main.krankMB'  )  }}">Krankmeldung Mitarbeiter</a>
+                <a href="{{ url_for('main.krankPT') }}">Krankmeldung Patient</a>
+        </div>
+    </div>
+</div>
+            <!--Table.Container ist für die ScrollBar-->
+<div class="table-container">
+    <table class="verwaltung-table">
+        <thead>
+            <tr>
+                <th>Vorname</th>
+                <th>Nachname</th>
+                <th>Abgemeldet von</th>
+                <th>bis</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in result %}
+            <tr>
+                <tr>
+                    <td>{{ item[0] }}</td>
+                    <td>{{ item[1] }}</td>
+                    <td>{{ item[2] }}</td>
+                    <td>{{ item[3] }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<!--Pfeil-Buttons unten
+ <div class="pfeil-buttons">
+    <button id="prevButton" class="pfeil-buttonL" onclick="showPrevRows()">◀</button>
+    <button id="nextButton" class="pfeil-buttonR" onclick="showNextRows()">▶</button>
+</div>
+-->
+    
+{% endblock %}

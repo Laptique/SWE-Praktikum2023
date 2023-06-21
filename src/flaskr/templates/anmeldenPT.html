@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Pflege für Alle</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+    <link
+      rel="icon"
+      href="{{ url_for('static', filename='media/logo.svg') }}"
+    />
+  </head>
+
+  <body>
+    <div class="mainBackground">
+      <video autoplay loop muted plays-inline class="back-video">
+        <source
+          src="{{ url_for('static', filename='media/videoclip.mp4') }}"
+          type="video/mp4"
+        />
+      </video>
+
+      <div class="center">
+        <h1>Neuen Patienten hinzufügen</h1>
+        <form method="POST" action="/anmeldenPT">
+          <div class="txt_field">
+            <input type="text" name="Vorname" required />
+            <label>Vorname</label>
+          </div>
+          <div class="txt_field">
+            <input type="text" name="Nachname" required />
+            <label>Nachname</label>
+          </div>
+          <div class="txt_field">
+            <input type="text" name="Straße" />
+            <label>Straße</label>
+          </div>
+          <div class="txt_field">
+            <input type="text" name="Hausnummer" pattern="[0-9]+" />
+            <label>Hausnummer</label>
+          </div>
+          <div class="txt_field">
+            <input type="number" name="PLZ" pattern="[0-9]+" />
+            <label>PLZ</label>
+          </div>
+          <div class="txt_field">
+            <input type="text" name="Ort" />
+            <label>Ort</label>
+          </div>
+          <!--<div class="txt_field">
+										<input type="text" name="Wohnraum">
+										<label>Wohnraum</label>
+									</div>-->
+
+          <div class="txt_field">
+            <input type="text" name="Nummer" required />
+            <label>Nummer</label>
+          </div>
+          <div class="txt_field">
+            <input type="number" name="Besuche" required />
+            <label>Besuche pro Tag</label>
+          </div>
+
+          <div class="txt_field">
+            <input type="radio" name="Rolle" value="Mobil" />
+            <label for="css">Mobil</label><br />
+          </div>
+          <div class="txt_field">
+            <input type="radio" name="Rolle" value="Stationaer" />
+            <label for="javascript">Stationaer</label>
+          </div>
+
+          <div class="anmeldenMB-zuruck">
+            <a href="{{ url_for('main.patienten_liste') }}">Zurück</a>
+          </div>
+          <input type="submit" value="Abschicken" />
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

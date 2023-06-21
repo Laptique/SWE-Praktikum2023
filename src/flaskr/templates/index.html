@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Pflege für Alle</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+    <link
+      rel="icon"
+      href="{{ url_for('static', filename='media/logo.svg') }}"
+    />
+  </head>
+
+  <body>
+    <div class="mainBackground">
+      <video autoplay loop muted plays-inline class="back-video">
+        <source
+          src="{{ url_for('static', filename='media/videoclip.mp4') }}"
+          type="video/mp4"
+        />
+      </video>
+
+      <div class="content">
+        <h1>
+          <img
+            src="{{ url_for('static', filename='media/logo.svg') }}"
+            class="logo"
+          />
+        </h1>
+      </div>
+
+      {% with messages = get_flashed_messages() %} {% if messages %}
+      <div class="notif">{{ messages[0] }}</div>
+      {% endif %} {% endwith %}
+
+      <div class="centerLOGIN">
+        <h1>Willkommen</h1>
+
+        <form method="POST" action="/login">
+          <div class="txt_fieldLOGIN">
+            <input type="text" name="Nachname" required />
+            <label>Nachname</label>
+          </div>
+          <div class="txt_fieldLOGIN">
+            <input type="password" name="Passwort" required />
+            <!--nach "name='Passwort' noch 'required' schreiben, damit man ein Passwort braucht um weiter zu kommen"-->
+            <label>Passwort</label>
+          </div>
+          <input type="submit" value="Login" />
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

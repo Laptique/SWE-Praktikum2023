@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="date-container" style="position: relative;">
+    <button class="date-btn" id="previous-btn">&#60;</button>
+    <span class="date">DD.MM.YYYY</span>
+    <button class="date-btn" id="next-btn">&#62;</button>
+    <div style="position: absolute; top: 0; right: 0;">
+        <a style="float: right;" href=" {{ url_for('main.dienstplan', date=date, generate=True)  }}  "><button class="rounded-button2">Dienstplan aktualisieren</button></a>
+    </div>
+</div>
+{% if appointments.__len__() > 0 %}
+<table class="appointment-table">
+    <thead>
+        <tr>
+            <th>Uhrzeit</th>
+            <th>Patient</th>
+            <th>Tel.</th>
+            <th>Rolle</th>
+            <th>Ort</th>
+            <th>Wohnraum</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in appointments %}
+            <tr>
+                <td>{{ item["Uhrzeit"] }}</td>
+                <td>{{ item["Vorname"] }} {{ item["Nachname"] }}</td>
+                <td>{{ item["TelefonNummer"] }}</td>
+                <td>{{ item["Rolle"] }}</td>
+                <td>{{ item["Strasse"] }} {{ item["Hausnummer"] }}, {{ item["PLZ"] }} {{ item["Ort"] }}</td>
+                <td>{{ item["Wohnraum"] }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<div class="appointment-table">
+  <h3 style="text-align: center; margin-top: 30px;">Es konnten keine Besuche für diesen Tag gefunden werden</h3>
+</div>
+{% endif %}
+<script>
+    const previousBtn = document.getElementById('previous-btn');
+    const nextBtn = document.getElementById('next-btn');
+    const dateElement = document.querySelector('.date');
+
+    let currentDate = new Date("{{ date }}");
+
+    previousBtn.addEventListener('click', () => {
+        currentDate.setDate(currentDate.getDate() - 1);
+        const newFormattedDate = currentDate.toISOString().replace(/T.*/,'')
+        window.location.replace("/dienstplan?date=" + newFormattedDate);
+    });
+
+    nextBtn.addEventListener('click', () => {
+        currentDate.setDate(currentDate.getDate() + 1);
+        const newFormattedDate = currentDate.toISOString().replace(/T.*/,'')
+        window.location.replace("/dienstplan?date=" + newFormattedDate);
+    });
+
+    const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+    const formattedDate = currentDate.toLocaleDateString('en-GB', options);
+    dateElement.textContent = formattedDate;
+</script>
+{% endblock %}

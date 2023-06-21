@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Pflege für Alle</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+    <link
+      rel="icon"
+      href="{{ url_for('static', filename='media/logo.svg') }}"
+    />
+  </head>
+
+  <body>
+    <div class="mainBackground">
+      <video autoplay loop muted plays-inline class="back-video">
+        <source
+          src="{{ url_for('static', filename='media/videoclip.mp4') }}"
+          type="video/mp4"
+        />
+      </video>
+
+      {% with messages = get_flashed_messages() %} {% if messages %}
+      <div class="notif">{{ messages[0] }}</div>
+      {% endif %} {% endwith %}
+      <div class="center">
+        <h1>Neuen Mitarbeiter hinzufügen</h1>
+        <form method="POST" action="/anmeldenMB">
+          <div class="txt_field">
+            <input
+              type="text"
+              name="Vorname"
+              pattern="^[a-zA-Z]+$"
+              title="Nur Buchstaben sind erlaubt."
+              required
+            />
+            <label>Vorname</label>
+          </div>
+          <div class="txt_field">
+            <input
+              type="text"
+              name="Nachname"
+              pattern="^[a-zA-Z]+$"
+              title="Nur Buchstaben sind erlaubt."
+              required
+            />
+            <label>Nachname</label>
+          </div>
+          <div class="txt_field">
+            <input
+              type="text"
+              name="Straße"
+              pattern="^[a-zA-Z]+$"
+              title="Nur Buchstaben sind erlaubt."
+              required
+            />
+            <label>Straße</label>
+          </div>
+          <div class="txt_field">
+            <input type="text" name="Hausnummer" pattern="[0-9]+" required />
+            <label>Hausnummer</label>
+          </div>
+          <div class="txt_field">
+            <input
+              type="text"
+              name="PLZ"
+              pattern="\d{5}"
+              title="Bitte geben Sie Ihre Postleitzahl im Format 12345 ein. Die PLZ ist 5-stellig."
+              required
+            />
+            <label>PLZ</label>
+          </div>
+          <div class="txt_field">
+            <input
+              type="text"
+              name="Ort"
+              pattern="^[a-zA-Z]+$"
+              title="Nur Buchstaben sind erlaubt."
+              required
+            />
+            <label>Ort</label>
+          </div>
+
+          <div class="txt_field">
+            <input
+              type="radio"
+              name="Position"
+              value="Verwaltung"
+              class="radio-btn"
+            />
+            <label for="html">Verwaltung</label><br />
+          </div>
+          <div class="txt_field">
+            <input
+              type="radio"
+              name="Position"
+              value="Mobil"
+              class="radio-btn"
+            />
+            <label for="css">Pflege - Mobil</label><br />
+          </div>
+          <div class="radio-field">
+            <div class="txt_field">
+              <input
+                type="radio"
+                name="Position"
+                value="Stationaer"
+                class="radio-btn"
+              />
+              <label for="javascript">Pflege - Stationaer</label>
+            </div>
+          </div>
+
+          <a href="{{ url_for('main.mitarbeiter_liste') }}">Zurück</a>
+          <input type="submit" value="Abschicken" />
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

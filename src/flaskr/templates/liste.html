@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="date-container">
+	<h1>{{ personen_type }}</h1>
+</div>
+<div class="table-header-verwaltung">
+    <div class="button-group">
+            <a href=" {{ url_for('main.mitarbeiter_liste')  }}  "><button class="rounded-button1">Mitarbeiter</button></a>
+            <a href=" {{ url_for('main.patienten_liste')  }}  "><button class="rounded-button2">Patient</button></a>
+    </div>
+    <!--<div class="search-box">
+        <input type="text" class="search-box-text" placeholder="Suchen...">
+    </div>-->
+    <div class="dropdown">
+        <button class="dropdown-button">Edit</button>
+        <div class="dropdown-content">
+        <a href="{{ url_for('main.anmeldenMB') }}">Anmeldung Mitarbeiter</a>
+        <a href="{{ url_for('main.anmeldenPT') }}">Anmeldung Patient</a>
+        </div>
+    </div>
+</div>
+<!--Table.Container ist für die ScrollBar-->
+<div class="table-container">
+    <table class="verwaltung-table">
+        <thead>
+            <tr>
+    <th>ID</th>
+                <th>Vorname</th>
+                <th>Nachname</th>
+                <th>Rolle</th>
+                <th>Adresse</th>
+                <th>Aktionen</th>
+            </tr>
+        </thead>
+        {% if personen_type == 'Mitarbeiter' %}
+        <tbody>
+            {% for item in result %}
+            <tr>
+                <tr>
+                    <td>{{ item["MB_ID"] }}</td>
+                    <td>{{ item["Vorname"] }}</td>
+                    <td>{{ item["Nachname"] }}</td>
+                    <td>{{ item["Rolle"] }}</td>
+                    <!--<td>Musterstraße 304, 48995, Krefeld</td>-->
+                    <td>{{ item["Strasse"] }} {{ item["Hausnummer"] }}, {{ item["PLZ"] }} {{ item["Ort"] }}</td>
+                    <td><a href="{{ url_for('main.confirm', ID=item[0], mbPT=personen_type)  }}"><button class="entfernen-button">Entfernen</button></a></td> 
+                    <!--<td>{{ item[2] }}<br><button class="entfernen-button" onclick="window.location.href='confirmation.html'">Entfernen</button></td>-->
+                </tr>
+            {% endfor %}
+        </tbody>
+        {% else %}
+        <tbody>
+            {% for item in result %}
+            <tr>
+                <tr>
+                    <td>{{ item["Kunden_ID"] }}</td>
+                    <td>{{ item["Vorname"] }}</td>
+                    <td>{{ item["Nachname"] }}</td>
+                    <td>{{ item["Rolle"] }}</td>
+                    <!--<td>Musterstraße 304, 48995, Krefeld</td>-->
+                    <td>{{ item["Straße"] }} {{ item["Hausnummer"] }}, {{ item["PLZ"] }} {{ item["Ort"] }}</td>
+                    <td><a href="{{ url_for('main.confirm', ID=item[0], mbPT=personen_type)  }}"><button class="entfernen-button">Entfernen</button></a></td> 
+                    <!--<td>{{ item[2] }}<br><button class="entfernen-button" onclick="window.location.href='confirmation.html'">Entfernen</button></td>-->
+                </tr>
+            {% endfor %}
+        </tbody>
+        {% endif %}
+    </table>
+</div>
+<!--Pfeil-Buttons unten
+ <div class="pfeil-buttons">
+    <button id="prevButton" class="pfeil-buttonL" onclick="showPrevRows()">◀</button>
+    <button id="nextButton" class="pfeil-buttonR" onclick="showNextRows()">▶</button>
+</div>
+-->
+{% endblock %}

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Pflege für Alle</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="media/logo.svg">
+</head>
+
+<body>
+  <div class="mainBackground">
+
+    <video autoplay loop muted plays-inline class="back-video">
+      <source src="media/videoclip.mp4" type="video/mp4">
+    </video>
+
+    <div class="content">
+      <h1><img src="media/logo.svg" class="logo"></h1>
+    </div>
+    <div class="center">
+        <h1>Person entfernen</h1>
+        <form method="POST" action="/removePerson">
+          <div class="txt_field">
+            <input type="text" name="vorname" required>
+            <label>Vorname</label>
+          </div>
+          <div class="txt_field">
+            <input type="text" name="nachname" required>
+            <label>Nachname</label>
+          </div>
+          <div class="txt_field">
+            <select name="position" required class="dropdownAbmelden-click">
+              <option value="Pflege-Stationaer">Pflege-Stationaer</option>
+              <option value="Pflege-Mobil">Pflege-Mobil</option>
+              <option value="Verwaltung">Verwaltung</option>
+            </select>
+          </div>
+          <a href="verwaltung.html">Zurück</a>
+          <input type="submit" value="Person entfernen">
+        </form>
+      </div>
+    </div>
+  </body>
+  </html>

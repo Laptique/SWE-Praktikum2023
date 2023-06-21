@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Pflege für Alle</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+    <link
+      rel="icon"
+      href="{{ url_for('static', filename='media/logo.svg') }}"
+    />
+  </head>
+
+  <body>
+    <div class="mainBackground">
+      <video autoplay loop muted plays-inline class="back-video">
+        <source
+          src="{{ url_for('static', filename='media/videoclip.mp4') }}"
+          type="video/mp4"
+        />
+      </video>
+
+      <div class="content">
+        <h1>
+          <img
+            src="{{ url_for('static', filename='media/logo.svg') }}"
+            class="logo"
+          />
+        </h1>
+      </div>
+      {% with messages = get_flashed_messages() %} {% if messages %}
+      <div class="notif">{{ messages[0] }}</div>
+      {% endif %} {% endwith %}
+      <div class="center">
+        <h1>Krankmeldung Patient</h1>
+        <form method="POST" action="/krankPT">
+          <div class="txt_field">
+            <input
+              type="text"
+              name="Vorname"
+              pattern="^[a-zA-Z]+$"
+              title="Nur Buchstaben sind erlaubt."
+              required
+            />
+            <label>Vorname</label>
+          </div>
+          <div class="txt_field">
+            <input
+              type="text"
+              name="Nachname"
+              pattern="^[a-zA-Z]+$"
+              title="Nur Buchstaben sind erlaubt."
+              required
+            />
+            <label>Nachname</label>
+          </div>
+          <div class="txt_field">
+            <input
+              type="text"
+              name="VonDatum"
+              pattern="\d{4}-\d{2}-\d{2}"
+              title="Bitte geben Sie ein Datum im Format JJJJ-MM-TT ein."
+              required
+            />
+            <label>Von (YYYY-MM-DD)</label>
+          </div>
+          <div class="txt_field">
+            <input
+              type="text"
+              name="EndeDatum"
+              pattern="\d{4}-\d{2}-\d{2}"
+              title="Bitte geben Sie ein Datum im Format JJJJ-MM-TT ein."
+              required
+            />
+            <label>Bis (YYYY-MM-DD)</label>
+          </div>
+          <a href="{{ url_for('main.verwaltung') }}">Zurück</a>
+          <input type="submit" value="Send" />
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

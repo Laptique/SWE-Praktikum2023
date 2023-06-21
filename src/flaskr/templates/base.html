@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pflege für Alle</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='media/logo.svg') }}">
+</head>
+<body>
+
+    <div class="mainBackground">
+
+        <video autoplay loop muted plays-inline class="back-video">
+            <source src="{{ url_for('static', filename='media/videoclip.mp4') }}" type="video/mp4">
+        </video>
+
+        <nav>
+            <img src="{{ url_for('static', filename='media/logo.svg') }}" class="logo1">
+            <ul>
+        {% if Mitarbeiter != None %}
+		<li>
+            <span> Willkommen {{ Mitarbeiter.Nachname }} </span> 
+        </li>
+        {% endif %}
+
+        {% if Mitarbeiter != None and Mitarbeiter.Rolle == "Verwaltung" %}
+		<li><a href="{{ url_for('main.mitarbeiter_liste') }}">PERSONEN VERWALTUNG</a></li>
+		<li><a href="{{ url_for('main.verwaltung') }}">KRANKMELDUNGEN</a></li>
+        {% else %}
+        <li><a href="{{ url_for('main.dienstplan') }}">DIENSTPLAN</a></li>
+        {% endif %}
+		<li><a href="{{ url_for('auth.logout') }}">LOGOUT</a></li>
+            </ul>
+        </nav>
+
+        <div class="center2">
+		{% block content %} {% endblock %}
+	</div>
+</body>
+</html>
