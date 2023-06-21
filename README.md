@@ -21,7 +21,7 @@ Die Gestaltung des Programms bleibt uns überlassen.
 
 ## Der Praktikumsbericht
 
-Der Praktikumsbericht befindet sich [hier](./Pflegeplaner.md)
+Der Praktikumsbericht befindet sich [hier](/docs/Pflegeplaner.md)
 
 ## How to run
 
